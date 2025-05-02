@@ -1,5 +1,6 @@
 # MWAD_EX05_image-carousel-in-react
-## Date:
+## Name:GURU PRASATH R
+## Reg.no:212223040053
 
 ## AIM
 To create a Image Carousel using React 
@@ -39,9 +40,101 @@ Use setInterval to call the nextImage() function at regular intervals.
 Clean up the interval when the component unmounts using clearInterval to prevent memory leaks.
 
 ## PROGRAM
+## app.jsx
+```
+import React from 'react';
+import ImageCarousel from './ImageCarousel';
+
+import currency  from './assets/img1.jpeg';
+import exchange from './assets/img2.jpeg';
+import trading from './assets/img3.jpeg';
+import buy_sell from './assets/img4.jpeg';
+import go_up from './assets/img5.jpeg';
+
+
+const App = () => {
+  const images = [currency,exchange,trading,buy_sell,go_up];
+
+  return (
+    <div>
+      <h2>Forex Market images</h2>
+      <ImageCarousel images={images} />
+    </div>
+  );
+};
+
+export default App;
+```
+## imagecarousel.jsx
+```
+import React, { useState, useEffect } from 'react';
+
+const ImageCarousel = ({ images }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextImage = () => {
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prevImage = () => {
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  useEffect(() => {
+    const interval = setInterval(nextImage, 3000);
+    return () => clearInterval(interval);
+  }, [images.length]);
+
+  return (
+    <div className="carousel">
+      <img src={images[currentIndex]} alt={`Slide ${currentIndex}`} />
+      <div className="controls">
+        <button onClick={prevImage}>⟨ Prev</button>
+        <button onClick={nextImage}>Next ⟩</button>
+      </div>
+    </div>
+  );
+};
+
+export default ImageCarousel;
+```
+## index.css
+```
+import React, { useState, useEffect } from 'react';
+
+const ImageCarousel = ({ images }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextImage = () => {
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prevImage = () => {
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  useEffect(() => {
+    const interval = setInterval(nextImage, 3000);
+    return () => clearInterval(interval);
+  }, [images.length]);
+
+  return (
+    <div className="carousel">
+      <img src={images[currentIndex]} alt={`Slide ${currentIndex}`} />
+      <div className="controls">
+        <button onClick={prevImage}>⟨ Prev</button>
+        <button onClick={nextImage}>Next ⟩</button>
+      </div>
+    </div>
+  );
+};
+
+export default ImageCarousel;
+```
 
 
 ## OUTPUT
+![Screenshot 2025-05-01 231943](https://github.com/user-attachments/assets/34eb8da0-4901-457e-9d6b-dca4f25476c4)
 
 
 ## RESULT
